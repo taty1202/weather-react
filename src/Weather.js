@@ -115,7 +115,7 @@ export default function Weather() {
       </div>
       <br />
       <small>
-        <a href="https://github.com/taty1202">Open-source code</a>, by Tatyana Araya 👩🏽‍💻
+        <a href="https://github.com/taty1202/weather-react">Open-source code</a>, by Tatyana Araya 👩🏽‍💻
       </small>
     </div>
   );
