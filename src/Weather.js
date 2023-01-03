@@ -1,18 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios";
 import "./weather.css";
 
-export default function Weather() {
-  let weather = {
-    city: "Seattle",
-    temperature: 45,
-    humidity: 0,
-    wind: 8,
-    date: "Tuesday, December 6",
-    time: "11:00",
-    icon: "https://ssl.gstatic.com/onebox/weather/64/cloudy.png",
-    description: "Cloudy"
-  };
+export default function Weather(props) {
+  const [weather, setWeather] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
 
+  function handleResponse(response) {
+    setWeather({
+      ready: true,
+      coordinates: response.data.coord,
+      temperature: response.data.main.temp,
+      humidity: response.data.main.humidity,
+      date: new Date(response.data.dt * 1000),
+      description: response.data.weather[0].description,
+      icon: response.data.weather[0].icon,
+      wind: response.data.wind.speed,
+      city: response.data.name,
+    });
+  }
+
+  function search() {
+    const apiKey = "f6bc4880443c49002ee94bcfaa186f29";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  if (weather.ready) {
   return (
     <div className="weather-app">
       <div className="cities">
@@ -118,5 +132,9 @@ export default function Weather() {
         <a href="https://github.com/taty1202/weather-react">Open-source code</a>, by Tatyana Araya 👩🏽‍💻
       </small>
     </div>
-  );
+    );
+    } else {
+    search();
+    return "Loading...";
+    }
 }
