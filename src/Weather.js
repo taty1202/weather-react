@@ -102,7 +102,7 @@ export default function Weather(props) {
               {weather.date} | {weather.time}
             </span>
           </li>
-          <li>{weather.description}</li>
+          <li className="text-capitalize">{weather.description}</li>
         </ul>
       </div>
       <div className="row">
