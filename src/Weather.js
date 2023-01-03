@@ -20,8 +20,17 @@ export default function Weather(props) {
     });
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
   function search() {
-    const apiKey = "f6bc4880443c49002ee94bcfaa186f29";
+    const apiKey = "471207500036931a50e0873b5b7a436b";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(handleResponse);
   }
@@ -57,16 +66,15 @@ export default function Weather(props) {
         </div>
       </div>
       <br />
-      <form className="search-form">
+      <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-6">
             <input
               type="search"
               placeholder="City Search"
-              autofocus="on"
-              class="form-control shadow-sm"
-              id="city-input"
-              autocomplete="off"
+              autoFocus="on"
+              className="form-control"
+             onChange={handleCityChange}
             />
           </div>
           <div className="col-3 search-btn">
