@@ -74,15 +74,7 @@ export default function Weather(props) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            open-sourced on GitHub
-          </a>{" "}
-          and{" "}
-          <a
-            href="https://weather-react-app-shecodes.netlify.app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            hosted on Netlify
+            open-sourced on GitHub.
           </a>
         </footer>
       </div>
