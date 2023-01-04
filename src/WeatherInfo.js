@@ -10,7 +10,7 @@ export default function WeatherInfo(props) {
         <div className="col-6">
           <h1>{props.data.city}</h1>
           <ul>
-            <li className="text-captilize">
+            <li className="text-capitalize">
               <FullDate date={props.data.date} />, {props.data.description}
             </li>
             <li>
