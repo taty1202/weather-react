@@ -31,28 +31,20 @@ export default function Weather(props) {
   }
 
   function search() {
-    const apiKey = "eac360db5fc86ft86450f3693e73o43f";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-
+    const apiKey = "b6eb4c341tof04c38a2c7d12bf3f4f58";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(handleResponse);
   }
 
   if (weatherData.ready) {
     return (
       <div className="Weather">
-        <a
-          href="https://www.shecodes.io/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="/images/logo.png" className="logo" alt="SheCodes Logo" />
-        </a>
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-9 ">
               <input
                 type="search"
-                placeholder="Enter a city.."
+                placeholder="Search city..."
                 className="form-control search-input"
                 onChange={handleCityChange}
               />
@@ -70,15 +62,15 @@ export default function Weather(props) {
         <footer>
           This project was coded by{" "}
           <a
-            href="https://www.shecodes.io/"
+            href="https://tatyana-araya-webpage.netlify.app"
             target="_blank"
             rel="noopener noreferrer"
           >
-            SheCodes
+            Tatyana Araya
           </a>{" "}
           and is{" "}
           <a
-            href="https://github.com/shecodesio/weather"
+            href="https://github.com/taty1202/weather-react"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -86,7 +78,7 @@ export default function Weather(props) {
           </a>{" "}
           and{" "}
           <a
-            href="https://shecodes-weather.netlify.app/"
+            href="https://weather-react-app-shecodes.netlify.app"
             target="_blank"
             rel="noopener noreferrer"
           >
