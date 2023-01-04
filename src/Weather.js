@@ -1,22 +1,23 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import WeatherInfo from "./WeatherInfo";
 import axios from "axios";
 import "./weather.css";
 
 export default function Weather(props) {
-  const [weather, setWeather] = useState({ ready: false });
+  const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
 
   function handleResponse(response) {
-    setWeather({
+    setWeatherData({
       ready: true,
-      coordinates: response.data.coord,
-      temperature: response.data.main.temp,
-      humidity: response.data.main.humidity,
-      date: new Date(response.data.dt * 1000),
-      description: response.data.weather[0].description,
-      icon: response.data.weather[0].icon,
+      coordinates: response.data.coordinates,
+      temperature: response.data.temperature.current,
+      humidity: response.data.temperature.humidity,
+      date: new Date(response.data.time * 1000),
+      description: response.data.condition.description,
+      icon: response.data.condition.icon,
       wind: response.data.wind.speed,
-      city: response.data.name,
+      city: response.data.city,
     });
   }
 
@@ -30,119 +31,72 @@ export default function Weather(props) {
   }
 
   function search() {
-    const apiKey = "471207500036931a50e0873b5b7a436b";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+    const apiKey = "eac360db5fc86ft86450f3693e73o43f";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+
     axios.get(apiUrl).then(handleResponse);
   }
 
-  if (weather.ready) {
-  return (
-    <div className="weather-app">
-      <div className="cities">
-        <div className="row">
-          <div className="col-12 cities-button">
-            <button
-              type="button"
-              className="btn btn-outline-secondary shadow-sm mr-2"
-            >
-              NYC
-            </button>
-            <button
-              type="button"
-              className="btn btn-outline-secondary shadow-sm mr-2"
-            >
-              Paris
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-secondary shadow-sm mr-2"
-            >
-              Tokyo
-            </button>
-            <button type="button" class="btn btn-outline-secondary shadow-sm">
-              Los Angeles
-            </button>
-          </div>
-        </div>
-      </div>
-      <br />
-      <form onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col-6">
-            <input
-              type="search"
-              placeholder="City Search"
-              autoFocus="on"
-              className="form-control"
-             onChange={handleCityChange}
-            />
-          </div>
-          <div className="col-3 search-btn">
-            <input
-              type="submit"
-              value="Search"
-              class="form-control btn btn-outline-secondary shadow-sm"
-            />
-          </div>
-          <div className="col-3 search-btn">
-            <input
-              type="submit"
-              value="Current City"
-              className="form-control btn btn-outline-primary shadow-sm"
-            />
-          </div>
-        </div>
-      </form>
-      <br />
-      <div className="overview">
-        <h1>{weather.city}</h1>
-        <ul>
-          <li>
-            <span>
-              {weather.date} | {weather.time}
-            </span>
-          </li>
-          <li className="text-capitalize">{weather.description}</li>
-        </ul>
-      </div>
-      <div className="row">
-        <div className="col-6">
-          <div className="clearfix weather-temperature">
-            <img
-              src={weather.icon}
-              alt={weather.description}
-              className="float-left"
-            />
-            <div className="float-left">
-              <strong>{weather.temperature}</strong>
-              <span className="units">
-                <a href="/" className="active">
-                  °F
-                </a>{" "}
-                | <a href="/">°C</a>
-              </span>
+  if (weatherData.ready) {
+    return (
+      <div className="Weather">
+        <a
+          href="https://www.shecodes.io/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="/images/logo.png" className="logo" alt="SheCodes Logo" />
+        </a>
+        <form onSubmit={handleSubmit}>
+          <div className="row">
+            <div className="col-9 ">
+              <input
+                type="search"
+                placeholder="Enter a city.."
+                className="form-control search-input"
+                onChange={handleCityChange}
+              />
+            </div>
+            <div className="col-3 p-0">
+              <input
+                type="submit"
+                value="Search"
+                className="btn btn-primary w-100"
+              />
             </div>
           </div>
-        </div>
-        <div className="col-6">
-          <ul>
-            <li>
-              Humidity: <span>{weather.humidity}</span>%
-            </li>
-            <li>
-              Wind: <span>{weather.wind}</span> mph
-            </li>
-          </ul>
-        </div>
+        </form>
+        <WeatherInfo data={weatherData} />
+        <footer>
+          This project was coded by{" "}
+          <a
+            href="https://www.shecodes.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            SheCodes
+          </a>{" "}
+          and is{" "}
+          <a
+            href="https://github.com/shecodesio/weather"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            open-sourced on GitHub
+          </a>{" "}
+          and{" "}
+          <a
+            href="https://shecodes-weather.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            hosted on Netlify
+          </a>
+        </footer>
       </div>
-      <br />
-      <small>
-        <a href="https://github.com/taty1202/weather-react">Open-source code</a>, by Tatyana Araya 👩🏽‍💻
-      </small>
-    </div>
     );
-    } else {
+  } else {
     search();
     return "Loading...";
-    }
+  }
 }
