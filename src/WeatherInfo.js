@@ -1,8 +1,7 @@
 
 import React from "react";
-import FormattedDate from "./FormattedDate";
+import FullDate from "./FullDate";
 import WeatherIcon from "./WeatherIcon";
-import "./WeatherInfo.css";
 
 export default function WeatherInfo(props) {
   return (
@@ -12,7 +11,7 @@ export default function WeatherInfo(props) {
           <h1>{props.data.city}</h1>
           <ul>
             <li>
-              <FormattedDate date={props.data.date} />, {props.data.description}
+              <FullDate date={props.data.date} />, {props.data.description}
             </li>
             <li>
               Humidity: <strong>{props.data.humidity}%</strong>, Wind:{" "}
