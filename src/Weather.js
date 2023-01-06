@@ -68,8 +68,8 @@ export default function Weather(props) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Tatyana Araya
-          </a>{" "}
+            Tatyana Araya 
+          </a>{" "} 👩🏽‍💻,
           and is{" "}
           <a
             href="https://github.com/taty1202/weather-react"
