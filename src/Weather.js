@@ -68,7 +68,7 @@ export default function Weather(props) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Tatyana Araya 
+            Tatyana Venanzi 
           </a>{" "} 👩🏽‍💻,
           and is{" "}
           <a
